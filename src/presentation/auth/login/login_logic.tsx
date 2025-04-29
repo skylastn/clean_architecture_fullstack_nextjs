@@ -1,5 +1,5 @@
 import { LoginRequest } from "@/domain/model/request/login_request";
-import { AuthService } from "@/domain/services/auth_service";
+import { AuthService } from "@/infrastructure/services/auth_service";
 import { useLoading } from "@/shared/component/elements/loading_context";
 import delay from "@/shared/utils/delay";
 import { useRouter } from "next/router";

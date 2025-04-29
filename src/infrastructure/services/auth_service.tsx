@@ -1,8 +1,8 @@
 import { UrlPath } from "@/shared/constant/url_path";
 import { NetworkUtils } from "@/shared/network/network";
-import { LoginResponse } from "../model/response/login_response";
+import { LoginResponse } from "../../domain/model/response/login_response";
 import { LocalDataSource } from "@/infrastructure/data_source/local_data_source";
-import { LoginRequest } from "../model/request/login_request";
+import { LoginRequest } from "../../domain/model/request/login_request";
 
 export class AuthService {
   static async login(
