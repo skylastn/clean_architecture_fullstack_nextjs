@@ -1,61 +1,77 @@
-import { Form, Input, Button, Typography, Card } from "antd";
+import Image from "next/image";
 import Link from "next/link";
+import { Form, Input, Button, Typography } from "antd";
+import authIllustration from "../../../../public/auth/auth.png";
+import logoSky from "../../../../public/auth/logo_sky.png";
 import { useLoginLogic } from "./login_logic";
-import styles from "./login.module.css";
-
 const { Title, Text } = Typography;
 
 const LoginUI = () => {
-  const {  setUsername, setPassword, handlerLogin } = useLoginLogic();
-
-  // const onFinish = () => {
-  //   handlerLogin();
-  // };
+  const { username, setUsername, password, setPassword, handlerLogin } =
+    useLoginLogic();
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.card}>
-        <Title level={2} style={{ textAlign: "center", marginBottom: 30 }}>Welcome Back</Title>
+    <div className="flex flex-col items-center justify-center h-[100vh]">
+      <div className="bg-white p-6 rounded shadow-lg mt-6 w-full max-w-md">
+        <div className="flex items-center space-x-4 mb-6 justify-between">
+          <Image
+            src={logoSky}
+            style={{ marginLeft: 20 }}
+            alt="logo"
+            width={50}
+            height={50}
+          />
+          <Title level={3}>Login</Title>
+          <Image
+            src={authIllustration}
+            alt="illustration"
+            width={100}
+            height={100}
+          />
+        </div>
 
-        <Form layout="vertical" onFinish={handlerLogin}>
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Masukkan username Anda!" }]}
-            // initialValue={username}
-          >
+        <Form layout="vertical" onFinish={handlerLogin} style={{ padding: 30 }}>
+          <Form.Item label="Username" name="username">
             <Input
-              placeholder="Masukkan username"
-              // value={username}
+              placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
+              style={{ height: 40 }}
             />
           </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Masukkan password Anda!" }]}
-            // initialValue={password}
-          >
+          <Form.Item label="Password" name="password">
             <Input.Password
-              placeholder="Masukkan password"
-              // value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              style={{ height: 40 }}
             />
+            <div className="flex justify-end mt-2">
+              <Text>Belum punya akun? </Text>
+              <Link
+                href="/auth/register"
+                className="text-red-600 font-semibold ml-1"
+              >
+                Register
+              </Link>
+            </div>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                height: 40,
+                backgroundColor: "#367614",
+                borderColor: "#367614",
+              }}
+              block
+            >
               Login
             </Button>
           </Form.Item>
         </Form>
-
-        <div style={{ textAlign: "center", marginTop: 20 }}>
-          <Text>Belum punya akun? </Text>
-          <Link href="/auth/register">Registrasi di sini</Link>
-        </div>
-      </Card>
+      </div>
     </div>
   );
 };

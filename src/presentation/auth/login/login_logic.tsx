@@ -1,39 +1,37 @@
-import { LoginRequest } from "@/domain/model/request/login_request";
-import { AuthService } from "@/infrastructure/services/auth_service";
-import { useLoading } from "@/shared/component/elements/loading_context";
-import delay from "@/shared/utils/delay";
+import { AuthService } from "@/infrastructure/services/fe/auth_service";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const useLoginLogic = () => {
-  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setLoading } = useLoading();
+  const router = useRouter();
 
   const handlerLogin = async () => {
-    setLoading(true);
+    if (!username || !password) {
+      toast.error("Username dan password tidak boleh kosong");
+      return;
+    }
+
     try {
-      var result = await AuthService.login({
-        username: username,
-        password: password,
+      const response = await AuthService.login({
+        username,
+        password,
       });
-      await delay(2);
-      if (!result.status) {
-        throw new Error(result.message ?? "");
-      }
-      toast.success("Berhasil Login!");
-      router.push("/product");
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
+
+      if (response.status == true) {
+        toast.success("Login berhasil!");
+        router.push("/welcome");
       } else {
-        toast.error(String(error));
+        console.log(response.message);
+        toast.error(response.message || "Terjadi kesalahan saat login.");
       }
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat login.");
+      console.log(error);
     }
   };
-  return { handlerLogin, setUsername, setPassword };
+
+  return { username, setUsername, password, setPassword, handlerLogin };
 };

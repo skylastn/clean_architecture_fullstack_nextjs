@@ -1,8 +1,10 @@
 import { UrlPath } from "@/shared/constant/url_path";
 import { NetworkUtils } from "@/shared/network/network";
-import { LoginResponse } from "../../domain/model/response/login_response";
-import { LocalDataSource } from "@/infrastructure/data_source/local_data_source";
-import { LoginRequest } from "../../domain/model/request/login_request";
+// import { LoginResponse } from "../../domain/fe/model/response/login_response";
+import { LocalDataSource } from "@/infrastructure/data_source/fe/local_data_source";
+import { LoginRequest } from "@/domain/model/request/login_request";
+import { LoginResponse } from "@/domain/model/response/login_response";
+// import { LoginRequest } from "../../domain/fe/model/request/login_request";
 
 export class AuthService {
   static async login(

@@ -1,5 +1,5 @@
-import { ResponseModel } from "@/domain/model/response_model";
-import { LocalDataSource } from "@/infrastructure/data_source/local_data_source";
+import { ResponseModel } from "@/domain/response_model";
+import { LocalDataSource } from "@/infrastructure/data_source/fe/local_data_source";
 import axios from "axios";
 
 const baseUrl = process.env.NEXT_PUBLIC_ENDPOINT_URL as string;
@@ -21,7 +21,8 @@ export const NetworkUtils = async (
     responseType: responseType,
   };
   const accessToken = LocalDataSource.getToken();
-  if (accessToken) config.headers["Authorization"] = `Bearer ${accessToken}`;
+  // if (accessToken) config.headers["Authorization"] = `Bearer ${accessToken}`;
+  if (accessToken) config.headers["token"] = `${accessToken}`;
 
   let res = await axios({
     url: endpoint,

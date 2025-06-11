@@ -1,7 +1,10 @@
 export const UrlPath = {
-	// BASE_URL: "http://103.127.135.12:8092/",
+  // BASE_URL: "http://103.127.135.12:8092/",
 
-	// auth
-	LOGIN: "api/login",
-	LOGOUT: "api/logout",
-}
+  // auth
+  LOGIN: "api/auth/login",
+  LOGOUT: "api/auth/logout",
+
+  // user
+  ME: "api/user/me",
+};

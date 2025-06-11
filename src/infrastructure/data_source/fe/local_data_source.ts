@@ -7,9 +7,9 @@ export namespace LocalDataSource {
   };
 
   export const saveToken = (token: string) => {
-    setItem("access_token", token);
+    setItem("token", token);
   };
   export const getToken = () => {
-    return getItem("access_token");
+    return getItem("token");
   };
 }

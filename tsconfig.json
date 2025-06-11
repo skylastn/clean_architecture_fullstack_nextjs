@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true, // Pastikan ini ada
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tailwind.config.ts"],
   "exclude": ["node_modules"]
 }

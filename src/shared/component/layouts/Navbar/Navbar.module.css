@@ -1,9 +1,45 @@
 .navbar {
+  background-color: white;
+  padding: 0.5rem;
   display: flex;
-  width: 100%;
-  height: 30px;
-  background-color: #000;
-  color: #fff;
+  justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  position: relative;
+}
+
+.popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 10rem;
+  background-color: white;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  z-index: 50;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.popupItem {
+  display: block;
+  padding: 0.5rem 0;
+  color: #4b5563;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.popupItem:hover {
+  color: #3b82f6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
