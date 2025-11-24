@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import werehouse from "../../../public/auth/auth.png";
-import logo from "../../../public/auth/logo_sky.png";
+import logo from "../../../public/auth/logo_lugu.png";
 
 const WelcomeUI = () => {
     const router = useRouter();

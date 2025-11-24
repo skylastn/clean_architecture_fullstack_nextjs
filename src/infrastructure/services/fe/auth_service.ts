@@ -10,13 +10,13 @@ export class AuthService {
   static async login(
     loginRequest: LoginRequest.Data
   ): Promise<LoginResponse.Response> {
-    var response = await NetworkUtils(
+    const response = await NetworkUtils(
       UrlPath.LOGIN,
       "POST",
-      null,
-      loginRequest
+      {},
+      { ...loginRequest }
     );
-    var result = LoginResponse.Convert.toData(JSON.stringify(response));
+    const result = LoginResponse.Convert.toData(JSON.stringify(response));
     if (result.status) {
       LocalDataSource.saveToken(result.data?.token ?? "");
     }

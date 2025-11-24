@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import logo_lugu from "../../../../../public/auth/logo_sky.png";
+import logo_lugu from "../../../../../public/auth/logo_lugu.png";
 import Image from "next/image";
 import styles from "@/shared/component/layouts/Navbar/Navbar.module.css";
 import { useRouter } from "next/navigation";

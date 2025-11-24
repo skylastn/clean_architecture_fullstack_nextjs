@@ -25,9 +25,8 @@ This application demonstrates a modern web development workflow where the fronte
 * **Next.js** (React Framework for Frontend & API Routes)
 * **React**
 * **TypeScript**
-* [Add your database here, e.g., **PostgreSQL**, **MongoDB**, **SQLite**]
-* [Add your ORM/ODM here, e.g., **Prisma**, **TypeORM**, **Mongoose**]
-* [Add any other significant libraries/frameworks, e.g., **Tailwind CSS**, **Zod**, **TanStack Query**]
+* MySQL
+* Tailwind
 
 ## Getting Started
 
@@ -35,31 +34,30 @@ To get a copy of the project up and running on your local machine, follow these 
 
 ### Prerequisites
 
-* Node.js (v18 or higher recommended)
+* Node.js (v24 or higher recommended)
 * npm or yarn
 
 ### Installation
 
-1.  Clone the repository:
-    ```bash
-    git clone [repository-url]
-    cd [project-name]
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
-3.  Set up environment variables:
-    Create a `.env.local` file in the root directory and add your environment-specific variables (e.g., database connection strings, API keys). Refer to `.env.example` if available.
+- npm install
 
-4.  Database Setup (if applicable):
-    * [Instructions for database migration/seeding, e.g., `npx prisma migrate dev`]
+### Running :
+- npm run dev
 
-### Running the Application
+### Build on Docker:
+- make deploy
 
-```bash
-npm run dev
-# or
-yarn dev
+### .env file Type : 
+- .env.production
+- .env.development
+- .env.local
+
+### create migration :
+  db-migrate create add_email_on_FUser_Android
+### run migration :
+  make ENV=test migrate
+#### roolback migration
+  make ENV=test roolBack
+
+Note :
+- Eksekusi menggunakan bash script (git terminal kalau di windows)

@@ -5,8 +5,6 @@ import { UserDatabaseDataSource } from "@/infrastructure/data_source/be/database
 import { UserMailDataSource } from "@/infrastructure/data_source/be/mail/user_mail_data_source";
 import { Helper } from "@/shared/utils/helper";
 import bcrypt from "bcrypt";
-import { NextApiRequest } from "next";
-import { NextRequest } from "next/server";
 
 export namespace AuthService {
   export async function register(
@@ -45,16 +43,15 @@ export namespace AuthService {
     return result;
   }
   export async function login(
-    username: string,
-    password: string,
-    req: NextRequest | NextApiRequest
+    email: string,
+    password: string
   ): Promise<PersonalAccessTokenResponse.Data> {
-    const isEmail: boolean = Helper.isEmail(username);
+    const isEmail: boolean = Helper.isEmail(email);
     let user: UserResponse.Data | null;
     if (isEmail) {
-      user = await UserDatabaseDataSource.getDetailUserByEmail(username);
+      user = await UserDatabaseDataSource.getDetailUserByEmail(email);
     } else {
-      user = await UserDatabaseDataSource.getDetailUserByPhone(username);
+      user = await UserDatabaseDataSource.getDetailUserByPhone(email);
     }
     if (user == null) {
       throw new Error("User Not Found");
@@ -72,8 +69,7 @@ export namespace AuthService {
     }
     return await UserDatabaseDataSource.generateToken(
       user.id ?? "",
-      user.name ?? "",
-      req
+      user.name ?? ""
     );
   }
 
@@ -143,14 +139,14 @@ export namespace AuthService {
 
     switch (type) {
       case ResendOTPType.email_verification:
-        var isCodeValid: boolean = false;
+        let isEmailVerificationCodeValid: boolean = false;
         // console.log("result : ", result);
         if (isEmail) {
-          isCodeValid = result.email_verified_code == code;
+          isEmailVerificationCodeValid = result.email_verification_code == code;
         } else {
-          isCodeValid = result.phone_verified_code == code;
+          isEmailVerificationCodeValid = result.phone_verification_code == code;
         }
-        if (!isCodeValid) {
+        if (!isEmailVerificationCodeValid) {
           throw new Error("Invalid verification code");
         }
         await UserDatabaseDataSource.updateVerificationUser(
@@ -161,8 +157,9 @@ export namespace AuthService {
         );
         break;
       case ResendOTPType.forgot_password:
-        var isCodeValid: boolean = result.other_verified_code == code;
-        if (!isCodeValid) {
+        const isForgotPasswordCodeValid: boolean =
+          result.other_verification_code == code;
+        if (!isForgotPasswordCodeValid) {
           throw new Error("Invalid verification code");
         }
         if (!password || !repeat_password) {

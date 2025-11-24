@@ -1,4 +1,3 @@
-import { PersonalAccessTokenResponse } from "@/domain/model/response/personal_access_token_response";
 import { UserResponse } from "@/domain/model/response/user_response";
 import { UserDatabaseDataSource } from "@/infrastructure/data_source/be/database/user_database_data_source";
 
@@ -10,8 +9,8 @@ export namespace UserService {
     data: UserResponse.Data[];
     total: number;
   }> {
-    var result = await UserDatabaseDataSource.getListUser(page, perPage);
-    var count = await UserDatabaseDataSource.getCountUser();
+    const result = await UserDatabaseDataSource.getListUser(page, perPage);
+    const count = await UserDatabaseDataSource.getCountUser();
     return { data: result, total: count };
   }
 

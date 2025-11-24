@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Form, Input, Button, Typography } from "antd";
 import authIllustration from "../../../../public/auth/auth.png";
-import logoSky from "../../../../public/auth/logo_sky.png";
+import logoSky from "../../../../public/auth/logo_lugu.png";
 import { useLoginLogic } from "./login_logic";
 const { Title, Text } = Typography;
 

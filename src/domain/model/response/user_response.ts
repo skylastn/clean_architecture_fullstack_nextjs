@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import { BaseResponse } from "./base_response";
 
 export namespace UserResponse {
@@ -9,9 +8,9 @@ export namespace UserResponse {
     phone?: string | null;
     email?: string | null;
     password?: string | null;
-    other_verified_code?: string | null;
-    email_verified_code?: string | null;
-    phone_verified_code?: string | null;
+    other_verification_code?: string | null;
+    email_verification_code?: string | null;
+    phone_verification_code?: string | null;
     created_at?: Date | null;
     updated_at?: Date | null;
     email_verified_at?: Date | null;
@@ -19,16 +18,18 @@ export namespace UserResponse {
   }
 
   export class Convert {
-    public static toData(content: User): Data {
+    // IMPORTANT: Change 'User' to 'any' or 'RowDataPacket' (if imported)
+    // to reflect that it's now a raw database row object.
+    public static toData(content: any): Data { // Changed from `content: User`
       return {
         id: content.id,
         name: content.name,
         email: content.email,
         phone: content.phone,
         password: content.password,
-        other_verified_code: content.other_verification_code,
-        email_verified_code: content.email_verification_code,
-        phone_verified_code: content.phone_verification_code,
+        other_verification_code: content.other_verification_code,
+        email_verification_code: content.email_verification_code,
+        phone_verification_code: content.phone_verification_code,
         created_at: content.created_at,
         updated_at: content.updated_at,
         email_verified_at: content.email_verified_at,
@@ -36,8 +37,9 @@ export namespace UserResponse {
       };
     }
 
-    public static toDataArray(prismaUsers: User[]): Data[] {
-      return prismaUsers.map((user) => Convert.toData(user));
+    // This method will now correctly map an array of 'any' objects
+    public static toDataArray(dbRows: any[]): Data[] { // Changed from `prismaUsers: User[]`
+      return dbRows.map((row) => Convert.toData(row));
     }
 
     public static toResponse(json: string): Response {
